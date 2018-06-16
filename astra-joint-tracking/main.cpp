@@ -19,7 +19,7 @@ int main()
 
 	reader.stream<astra::DepthStream>().start();
 
-	reader.stream<astra::BodyStream>().start();
+	//reader.stream<astra::BodyStream>().start();
 
 	reader.add_listener(listener);
 
