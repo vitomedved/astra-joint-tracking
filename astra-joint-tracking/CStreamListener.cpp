@@ -25,4 +25,10 @@ void StreamListener::on_frame_ready(astra::StreamReader& reader,
 			std::cout << x.x << std::endl;
 		}*/
 	}
+
+	auto handFrame = frame.get<astra::HandFrame>();
+	if (handFrame.is_valid())
+	{
+		auto m_handPoints = handFrame.handpoints();
+	}
 }

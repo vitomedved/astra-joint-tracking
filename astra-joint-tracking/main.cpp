@@ -20,14 +20,18 @@ AstraStream stream;
 double w;
 double h;
 
+void drawLine(float x1, float y1, float x2, float y2)
+{
+	glBegin(GL_LINES);
+		glVertex2f(x1, h - y1);
+		glVertex2f(x2, h - y2);
+	glEnd();
+}
+
 //Paints canvas (X-Y pairs of each joint point including lines between them)
 void Draw()
 {
 	auto bodies = stream.getBodies();
-	if (bodies.empty())
-	{
-		return;
-	}
 
 	glClear(GL_COLOR_BUFFER_BIT); // clear display window
 
@@ -36,18 +40,176 @@ void Draw()
 
 	glPointSize(5.0f);
 
-	auto joints = bodies[0].joints();
-
-	for (auto joint : joints)
+	for (auto body : bodies)
 	{
-		auto x = joint.depth_position().x;
-		auto y = joint.depth_position().y;
+		auto joints = body.joints();
+
+		//Draw joint points
+		for (int i = 0; i < joints.size() - 1; i++)
+		{
+			auto xi = joints[i].depth_position().x;
+			auto yi = joints[i].depth_position().y;
+
+			if (i == 0)
+			{
+				glPointSize(30.0f);
+			}
+
+			glBegin(GL_POINTS);
+			glColor3f(1.0, 1.0, 0.0);
+			glVertex2i(xi, h - yi);
+			glEnd();
+
+			if (i == 0)
+			{
+				glPointSize(5.0f);
+			}
+		}
+
+		//Draw lines
+		drawLine(
+			joints[(int)astra::JointType::Head].depth_position().x,
+			joints[(int)astra::JointType::Head].depth_position().y,
+			joints[(int)astra::JointType::Neck].depth_position().x,
+			joints[(int)astra::JointType::Neck].depth_position().y
+		);
+
+		drawLine(
+			joints[(int)astra::JointType::Neck].depth_position().x,
+			joints[(int)astra::JointType::Neck].depth_position().y,
+			joints[(int)astra::JointType::ShoulderSpine].depth_position().x,
+			joints[(int)astra::JointType::ShoulderSpine].depth_position().y
+		);
+
+		drawLine(
+			joints[(int)astra::JointType::LeftShoulder].depth_position().x,
+			joints[(int)astra::JointType::LeftShoulder].depth_position().y,
+			joints[(int)astra::JointType::ShoulderSpine].depth_position().x,
+			joints[(int)astra::JointType::ShoulderSpine].depth_position().y
+		);
+
+		drawLine(
+			joints[(int)astra::JointType::RightShoulder].depth_position().x,
+			joints[(int)astra::JointType::RightShoulder].depth_position().y,
+			joints[(int)astra::JointType::ShoulderSpine].depth_position().x,
+			joints[(int)astra::JointType::ShoulderSpine].depth_position().y
+		);
+
+		drawLine(
+			joints[(int)astra::JointType::RightShoulder].depth_position().x,
+			joints[(int)astra::JointType::RightShoulder].depth_position().y,
+			joints[(int)astra::JointType::RightElbow].depth_position().x,
+			joints[(int)astra::JointType::RightElbow].depth_position().y
+		);
+
+		drawLine(
+			joints[(int)astra::JointType::LeftShoulder].depth_position().x,
+			joints[(int)astra::JointType::LeftShoulder].depth_position().y,
+			joints[(int)astra::JointType::LeftElbow].depth_position().x,
+			joints[(int)astra::JointType::LeftElbow].depth_position().y
+		);
+
+		drawLine(
+			joints[(int)astra::JointType::LeftWrist].depth_position().x,
+			joints[(int)astra::JointType::LeftWrist].depth_position().y,
+			joints[(int)astra::JointType::LeftElbow].depth_position().x,
+			joints[(int)astra::JointType::LeftElbow].depth_position().y
+		);
+
+		drawLine(
+			joints[(int)astra::JointType::RightWrist].depth_position().x,
+			joints[(int)astra::JointType::RightWrist].depth_position().y,
+			joints[(int)astra::JointType::RightElbow].depth_position().x,
+			joints[(int)astra::JointType::RightElbow].depth_position().y
+		);
+
+		drawLine(
+			joints[(int)astra::JointType::RightWrist].depth_position().x,
+			joints[(int)astra::JointType::RightWrist].depth_position().y,
+			joints[(int)astra::JointType::RightHand].depth_position().x,
+			joints[(int)astra::JointType::RightHand].depth_position().y
+		);
+
+		drawLine(
+			joints[(int)astra::JointType::LeftWrist].depth_position().x,
+			joints[(int)astra::JointType::LeftWrist].depth_position().y,
+			joints[(int)astra::JointType::LeftHand].depth_position().x,
+			joints[(int)astra::JointType::LeftHand].depth_position().y
+		);
+
+		drawLine(
+			joints[(int)astra::JointType::MidSpine].depth_position().x,
+			joints[(int)astra::JointType::MidSpine].depth_position().y,
+			joints[(int)astra::JointType::ShoulderSpine].depth_position().x,
+			joints[(int)astra::JointType::ShoulderSpine].depth_position().y
+		);
+
+		drawLine(
+			joints[(int)astra::JointType::MidSpine].depth_position().x,
+			joints[(int)astra::JointType::MidSpine].depth_position().y,
+			joints[(int)astra::JointType::BaseSpine].depth_position().x,
+			joints[(int)astra::JointType::BaseSpine].depth_position().y
+		);
+
+		drawLine(
+			joints[(int)astra::JointType::LeftHip].depth_position().x,
+			joints[(int)astra::JointType::LeftHip].depth_position().y,
+			joints[(int)astra::JointType::BaseSpine].depth_position().x,
+			joints[(int)astra::JointType::BaseSpine].depth_position().y
+		);
+
+		drawLine(
+			joints[(int)astra::JointType::RightHip].depth_position().x,
+			joints[(int)astra::JointType::RightHip].depth_position().y,
+			joints[(int)astra::JointType::BaseSpine].depth_position().x,
+			joints[(int)astra::JointType::BaseSpine].depth_position().y
+		);
+
+		drawLine(
+			joints[(int)astra::JointType::RightHip].depth_position().x,
+			joints[(int)astra::JointType::RightHip].depth_position().y,
+			joints[(int)astra::JointType::RightKnee].depth_position().x,
+			joints[(int)astra::JointType::RightKnee].depth_position().y
+		);
+
+		drawLine(
+			joints[(int)astra::JointType::LeftHip].depth_position().x,
+			joints[(int)astra::JointType::LeftHip].depth_position().y,
+			joints[(int)astra::JointType::LeftKnee].depth_position().x,
+			joints[(int)astra::JointType::LeftKnee].depth_position().y
+		);
+
+		drawLine(
+			joints[(int)astra::JointType::LeftFoot].depth_position().x,
+			joints[(int)astra::JointType::LeftFoot].depth_position().y,
+			joints[(int)astra::JointType::LeftKnee].depth_position().x,
+			joints[(int)astra::JointType::LeftKnee].depth_position().y
+		);
+
+		drawLine(
+			joints[(int)astra::JointType::RightFoot].depth_position().x,
+			joints[(int)astra::JointType::RightFoot].depth_position().y,
+			joints[(int)astra::JointType::RightKnee].depth_position().x,
+			joints[(int)astra::JointType::RightKnee].depth_position().y
+		);
+	}
+
+	///////////////////////HAND POINTS??
+	//Currently commented out in on_frame_ready listener because it does not work as expected
+	//This will draw nothing at this point
+
+	auto handPoints = stream.getHandPoints();
+	for (auto handPoint : handPoints)
+	{
+
+		auto x = handPoint.depthPosition.x;
+		auto y = handPoint.depthPosition.y;
 
 		glBegin(GL_POINTS);
-			glColor3f(0.0, 0.0, 0.5);
-			glVertex2i(w - x, h - y);
+		glVertex2i(x, h - y);
 		glEnd();
 	}
+
 
 	glutSwapBuffers();
 }
@@ -80,9 +242,9 @@ void setDrawing(int *iArgc, char **cppArgv)
 {
 	glutInit(iArgc, cppArgv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	glutInitWindowSize(958, 718);
+	glutInitWindowSize(640, 480);
 	glutInitWindowPosition(350, 10);
-	glutCreateWindow("Skeleton Tracking");
+	glutCreateWindow("Skeleton Tracking - Orbbec Astra");
 	Initialize();
 	glutDisplayFunc(Draw);
 	Timer(0);
@@ -108,31 +270,22 @@ int main(int iArgc, char **cppArgv)
 	auto bodyStream = reader.stream<astra::BodyStream>();
 	bodyStream.start();
 
+	auto handStream = reader.stream<astra::HandStream>();
+	//handStream.start();
+
 	reader.add_listener(stream);
 
 	std::thread t1(setDrawing, &iArgc, cppArgv);
-
-	while (true)
-	{
-		astra_update();
-	}
-
-	astra::terminate();
-
-	//AstraStream stream;
-
-	//stream.init();
-
-	//std::thread t1(setDrawing, &iArgc, cppArgv);
-	//setDrawing(iArgc, cppArgv);
 
 	while (stream.streamRunning)
 	{
 		astra_update();
 	}
 
+	astra::terminate();
+
 	t1.join();
-	stream.terminate();
+	astra::terminate();
 
 	return 0;
 }
