@@ -24,6 +24,7 @@ const uint8_t ASTRA_MAX_READER_STREAMS = 16;
 
 const int ASTRA_TIMEOUT_FOREVER = -1;
 const int ASTRA_TIMEOUT_RETURN_IMMEDIATELY = 0;
+const int ASTRA_TIMEOUT_SHORT = 5000;
 
 typedef struct _astra_stream* astra_stream_t;
 

@@ -88,7 +88,7 @@ namespace astra {
 
         bool is_valid() { return readerRef_ != nullptr; }
 
-        Frame get_latest_frame(int timeoutMillis = ASTRA_TIMEOUT_FOREVER)
+        Frame get_latest_frame(int timeoutMillis = ASTRA_TIMEOUT_SHORT)
         {
             if (!is_valid())
                 throw std::logic_error("StreamReader is not associated with a streamset.");
