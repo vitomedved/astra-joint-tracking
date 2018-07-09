@@ -1,3 +1,10 @@
+/**
+* @file CStreamListener.h
+* @brief Currently unused
+*
+*
+*/
+
 #pragma once
 
 //#include <astra\astra.hpp>

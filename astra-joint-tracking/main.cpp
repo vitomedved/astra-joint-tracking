@@ -1,3 +1,10 @@
+/**
+* @file main.cpp
+* @brief Main file of project
+* \mainpage Description
+* Project which visualizes joint tracking using ORBBEC Astra 3D camera with OpenGL
+*/
+
 
 #include "stdafx.h"
 
