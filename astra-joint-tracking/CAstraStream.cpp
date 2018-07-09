@@ -71,7 +71,6 @@ AstraStream::AstraStream() :
 void AstraStream::on_frame_ready(astra::StreamReader& reader,
 	astra::Frame& frame)
 {
-	//std::cout << "Frame ready!" << std::endl;
 
 	auto bodyFrame = frame.get<astra::BodyFrame>();
 
@@ -97,7 +96,7 @@ astra::BodyList AstraStream::getBodies()
 	return m_bodies;
 }
 
-astra::HandFrame::HandPointList AstraStream::getHandPoints()
+/*astra::HandFrame::HandPointList AstraStream::getHandPoints()
 {
 	return m_handPoints;
-}
+}*/
