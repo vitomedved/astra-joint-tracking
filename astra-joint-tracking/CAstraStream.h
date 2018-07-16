@@ -23,7 +23,7 @@ public:
 	bool										streamRunning;
 
 	// Constructor
-	//											AstraStream();
+												AstraStream();
 	// Initializes camera
 	// @returns true if init is successfull
 	// @returns false if init is not successfull
@@ -37,14 +37,20 @@ public:
 														astra::StreamReader& reader,
 														astra::Frame& frame) override;
 	// Destructor
-	//											~AstraStream();
+												~AstraStream();
 	/// Getter for currently tracked bodies
 	/// @returns currently tracked bodies or NULL
 	astra::BodyList								getBodies();
+
+	/// Getter for currently tracked body masks
+	/// @returns currently tracked body mask or NULL
+	astra::BodyMask								getBodyMask();
 	// Getter for currently tracked hands
 	// @returns currently tracked hand points or NULL
 	//astra::HandFrame::HandPointList				getHandPoints();
 
+	const astra::Vector3f*							m_nearestPoint;
+	astra::PointFrame								m_pointFrame;
 private:
 	// Basic astra stream variable needed to start a stream
 	//astra::StreamSet							m_sensor;
@@ -54,8 +60,12 @@ private:
 	//StreamListener							m_listener;
 	/// Currently tracked bodies
 	astra::BodyList								m_bodies;
+	///Currently tracked body masks
+	astra::BodyMask								m_bodyMask;
 	// Currently tracked hand points
 	//astra::HandFrame::HandPointList				m_handPoints;
+
+
 
 protected:
 

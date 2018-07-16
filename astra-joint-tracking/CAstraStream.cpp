@@ -5,7 +5,8 @@
 
 
 AstraStream::AstraStream() :
-	streamRunning(true)
+	streamRunning(true),
+	m_pointFrame(NULL)
 {
 	//TODO
 }
@@ -72,11 +73,52 @@ void AstraStream::on_frame_ready(astra::StreamReader& reader,
 	astra::Frame& frame)
 {
 
+	auto pointFrame = frame.get<astra::PointFrame>();
+
+	if (pointFrame.is_valid())
+	{
+		m_pointFrame = pointFrame;
+		int width = pointFrame.width();
+		int height = pointFrame.height();
+		int framIndex = pointFrame.frame_index();
+
+		const astra::Vector3f* data = pointFrame.data();
+
+		int nearestZ = 999999;
+
+		const astra::Vector3f* nearestPoint = data;
+
+		for (int i = 0; i < pointFrame.length(); i++)
+		{
+			const astra::Vector3f* dataPoint = data + i;
+			if (dataPoint->z > 0 && dataPoint->z < nearestZ)
+			{
+				nearestPoint = dataPoint;
+				m_nearestPoint = dataPoint;
+				nearestZ = dataPoint->z;
+			}
+		}
+		/*std::cout << "x: " << nearestPoint->x
+			<< ", y: " << nearestPoint->y
+			<< ", z: " << nearestPoint->z
+			<< std::endl;*/
+	}
+
+	//const astra::Vector3f *pixel = pointFrame.data()->dot(vector);
+
+
+	//std::cout << "x: " << pixel->x << "y: " << pixel->y << "z: " << pixel->z << std::endl;
+
 	auto bodyFrame = frame.get<astra::BodyFrame>();
 
 	if (bodyFrame.is_valid())
 	{
 		m_bodies = bodyFrame.bodies();
+		m_bodyMask = bodyFrame.body_mask();
+		const uint8_t* data = m_bodyMask.data();
+
+		
+		
 	}
 
 	/*auto handFrame = frame.get<astra::HandFrame>();
@@ -96,7 +138,14 @@ astra::BodyList AstraStream::getBodies()
 	return m_bodies;
 }
 
+astra::BodyMask AstraStream::getBodyMask()
+{
+return m_bodyMask;
+}
+
 /*astra::HandFrame::HandPointList AstraStream::getHandPoints()
 {
 	return m_handPoints;
 }*/
+
+

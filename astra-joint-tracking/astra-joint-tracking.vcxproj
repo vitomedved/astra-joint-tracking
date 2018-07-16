@@ -103,7 +103,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>astra_core.lib;astra_core_api.lib;astra.lib;OpenNI2.lib;orbbec.lib;OniFile.lib;Plugins\openni_sensor.lib;Plugins\orbbec_hand.lib;Plugins\orbbec_xs.lib;glew\glew32.lib;glew\glew32mx.lib;glew\glew32mxs.lib;glew\glew32s.lib;glut\x64\freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>astra_core.lib;astra_core_api.lib;astra.lib;OpenNI2.lib;orbbec.lib;OniFile.lib;Plugins\openni_sensor.lib;Plugins\orbbec_hand.lib;Plugins\orbbec_xs.lib;glew\glew32.lib;glut\x64\freeglut.lib;glfw3.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -123,7 +123,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>astra_core.lib;astra_core_api.lib;astra.lib;OpenNI2.lib;orbbec.lib;OniFile.lib;Plugins\openni_sensor.lib;Plugins\orbbec_hand.lib;Plugins\orbbec_xs.lib;glew\glew32.lib;glew\glew32mx.lib;glew\glew32mxs.lib;glew\glew32s.lib;glut\x64\freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>astra_core.lib;astra_core_api.lib;astra.lib;OpenNI2.lib;orbbec.lib;OniFile.lib;Plugins\openni_sensor.lib;Plugins\orbbec_hand.lib;Plugins\orbbec_xs.lib;glew\glew32.lib;glut\x64\freeglut.lib;glfw3.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -147,7 +147,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>astra_core.lib;astra_core_api.lib;astra.lib;OpenNI2.lib;orbbec.lib;OniFile.lib;Plugins\openni_sensor.lib;Plugins\orbbec_hand.lib;Plugins\orbbec_xs.lib;glew\glew32.lib;glew\glew32mx.lib;glew\glew32mxs.lib;glew\glew32s.lib;glut\x64\freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>astra_core.lib;astra_core_api.lib;astra.lib;OpenNI2.lib;orbbec.lib;OniFile.lib;Plugins\openni_sensor.lib;Plugins\orbbec_hand.lib;Plugins\orbbec_xs.lib;glew\glew32.lib;glut\x64\freeglut.lib;glfw3.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -171,7 +171,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>astra_core.lib;astra_core_api.lib;astra.lib;OpenNI2.lib;orbbec.lib;OniFile.lib;Plugins\openni_sensor.lib;Plugins\orbbec_hand.lib;Plugins\orbbec_xs.lib;glew\glew32.lib;glew\glew32mx.lib;glew\glew32mxs.lib;glew\glew32s.lib;glut\x64\freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>astra_core.lib;astra_core_api.lib;astra.lib;OpenNI2.lib;orbbec.lib;OniFile.lib;Plugins\openni_sensor.lib;Plugins\orbbec_hand.lib;Plugins\orbbec_xs.lib;glew\glew32.lib;glut\x64\freeglut.lib;glfw3.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -196,6 +196,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="CStreamListener.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
